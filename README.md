@@ -26,7 +26,7 @@ g++ -std=c++17 -Wall -Wextra -pedantic main.cpp -o arcade_engine.exe
 
 ## Testes
 
-O teste existente cobre atualização de posição e rejeição de delta time negativo ou não finito.
+Os testes cobrem soma e magnitude vetorial (incluindo valores grandes que podem causar overflow intermediário), atualização de posição, rejeição de delta time inválido e prevenção de overflow da posição.
 
 Linux/macOS:
 
@@ -34,6 +34,10 @@ Linux/macOS:
 g++ -std=c++17 -Wall -Wextra -pedantic tests/test_core.cpp -o test_core
 ./test_core
 ```
+
+## Integração contínua
+
+O GitHub Actions compila o exemplo e a suíte de regressão com avisos tratados como erros e executa ambos em pushes para `main` e em pull requests.
 
 ## Conceitos implementados
 
@@ -45,7 +49,7 @@ g++ -std=c++17 -Wall -Wextra -pedantic tests/test_core.cpp -o test_core
 
 ## Próximas melhorias
 
-- Expandir os testes para magnitude vetorial, soma e overflow de coordenadas.
+- Expandir os testes para limites adicionais de vetores e cenários extremos de atualização.
 - Separar os tipos em módulos e adicionar CMake quando o projeto crescer.
 - Introduzir renderização somente quando houver uma biblioteca gráfica definida.
 
