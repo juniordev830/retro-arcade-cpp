@@ -24,17 +24,28 @@ g++ -std=c++17 -Wall -Wextra -pedantic main.cpp -o arcade_engine.exe
 .\arcade_engine.exe
 ```
 
+## Testes
+
+O teste existente cobre atualização de posição e rejeição de delta time negativo ou não finito.
+
+Linux/macOS:
+
+```bash
+g++ -std=c++17 -Wall -Wextra -pedantic tests/test_core.cpp -o test_core
+./test_core
+```
+
 ## Conceitos implementados
 
 - Tipo `Vector2` com soma e cálculo de magnitude.
 - Entidade com posição e velocidade.
 - Atualização de posição usando delta time.
+- Validação de valores não finitos e prevenção de overflow de posição.
 - Demonstração no terminal.
 
 ## Próximas melhorias
 
-- Adicionar testes unitários para operações vetoriais.
-- A simulação rejeita delta time negativo/não finito e estados que produziriam coordenadas não finitas.
+- Expandir os testes para magnitude vetorial, soma e overflow de coordenadas.
 - Separar os tipos em módulos e adicionar CMake quando o projeto crescer.
 - Introduzir renderização somente quando houver uma biblioteca gráfica definida.
 
