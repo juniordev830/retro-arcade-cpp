@@ -15,7 +15,7 @@ struct Vector2 {
     }
 
     float magnitude() const {
-        return std::sqrt(x * x + y * y);
+        return std::hypot(x, y);
     }
 };
 
