@@ -15,3 +15,7 @@ jobs:
         run: g++ -std=c++17 -Wall -Wextra -Wpedantic -Werror main.cpp -o arcade_engine
       - name: Run smoke test
         run: ./arcade_engine
+      - name: Compile regression tests with warnings
+        run: g++ -std=c++17 -Wall -Wextra -Wpedantic -Werror tests/test_core.cpp -o test_core
+      - name: Run regression tests
+        run: ./test_core
