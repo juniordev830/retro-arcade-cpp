@@ -34,7 +34,7 @@ g++ -std=c++17 -Wall -Wextra -pedantic main.cpp -o arcade_engine.exe
 ## Próximas melhorias
 
 - Adicionar testes unitários para operações vetoriais.
-- Validar delta time e valores não finitos.
+- A simulação rejeita delta time negativo/não finito e estados que produziriam coordenadas não finitas.
 - Separar os tipos em módulos e adicionar CMake quando o projeto crescer.
 - Introduzir renderização somente quando houver uma biblioteca gráfica definida.
 
