@@ -2,6 +2,7 @@
 #include <iostream>
 #include <stdexcept>
 #include <string>
+#include <utility>
 
 struct Vector2 {
     float x;
