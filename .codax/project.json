@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "project_kind": "Motor de jogo demonstrativo C++",
+  "entry_points": [
+    "core.hpp",
+    "tests/test_core.cpp"
+  ],
+  "test_commands": [
+    "g++ -std=c++17 -Wall -Wextra -Wpedantic -Werror tests/test_core.cpp -o test_core",
+    "./test_core"
+  ],
+  "review_focus": [
+    "Precisão numérica e overflow na física",
+    "Validação de deltaTime e estado finito"
+  ]
+}
