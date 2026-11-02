@@ -47,10 +47,16 @@ O GitHub Actions compila o exemplo e a suíte de regressão com avisos tratados 
 - Validação de valores não finitos e prevenção de overflow de posição.
 - Demonstração no terminal.
 
+## Organização
+
+- `core.hpp`: tipos reutilizáveis `Vector2` e `Entity`, independentes do executável.
+- `main.cpp`: demonstração no terminal.
+- `tests/test_core.cpp`: testes que incluem diretamente o núcleo.
+
 ## Próximas melhorias
 
 - Expandir os testes para limites adicionais de vetores e cenários extremos de atualização.
-- Separar os tipos em módulos e adicionar CMake quando o projeto crescer.
+- Adicionar CMake quando o projeto crescer.
 - Introduzir renderização somente quando houver uma biblioteca gráfica definida.
 
 Projeto de aprendizagem em evolução.
