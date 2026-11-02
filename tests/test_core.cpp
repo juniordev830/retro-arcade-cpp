@@ -1,5 +1,4 @@
-#define RETRO_ARCADE_NO_MAIN
-#include "../main.cpp"
+#include "../core.hpp"
 
 #include <cassert>
 #include <limits>
