@@ -1,3 +1,5 @@
 arcade_engine
 *.o
 .DS_Store
+test_core
+test_core.exe
