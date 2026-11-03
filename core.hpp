@@ -16,8 +16,22 @@ struct Vector2 {
         return Vector2(x + other.x, y + other.y);
     }
 
+    Vector2 operator-(const Vector2& other) const {
+        return Vector2(x - other.x, y - other.y);
+    }
+
     float magnitude() const {
         return std::hypot(x, y);
+    }
+
+    Vector2 normalized() const {
+        const float length = magnitude();
+        if (length == 0.0F) return Vector2();
+        return Vector2(x / length, y / length);
+    }
+
+    float distanceTo(const Vector2& other) const {
+        return (*this - other).magnitude();
     }
 };
 
