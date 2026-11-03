@@ -16,6 +16,13 @@ int main() {
     assert(sum.x == 4.0F);
     assert(sum.y == 6.0F);
 
+    const Vector2 unit = ordinary.normalized();
+    assert(std::abs(unit.x - 0.6F) < 0.0001F);
+    assert(std::abs(unit.y - 0.8F) < 0.0001F);
+    assert(std::abs(ordinary.distanceTo(Vector2(0.0F, 0.0F)) - 5.0F) < 0.0001F);
+    const Vector2 zero = Vector2().normalized();
+    assert(zero.x == 0.0F && zero.y == 0.0F);
+
     Entity entity("test", 1.0F, 2.0F);
     entity.velocity = Vector2(2.0F, -1.0F);
     entity.update(0.5F);
