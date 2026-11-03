@@ -49,5 +49,40 @@ int main() {
     try { overflow.update(2.0F); } catch (const std::overflow_error&) { rejected = true; }
     assert(rejected);
     assert(overflow.position.x == std::numeric_limits<float>::max() / 2.0F);
+
+    // Zero time must preserve the current position, even with nonzero velocity.
+    Entity stationary("stationary", -5.0F, 7.0F);
+    stationary.velocity = Vector2(42.0F, -100.0F);
+    stationary.update(0.0F);
+    assert(stationary.position.x == -5.0F);
+    assert(stationary.position.y == 7.0F);
+
+    // Invalid state must be rejected before changing either coordinate.
+    Entity invalidPosition("invalid position", 2.0F, 3.0F);
+    invalidPosition.position.x = std::numeric_limits<float>::quiet_NaN();
+    rejected = false;
+    try { invalidPosition.update(0.5F); }
+    catch (const std::invalid_argument&) { rejected = true; }
+    assert(rejected);
+    assert(invalidPosition.position.y == 3.0F);
+
+    Entity invalidVelocity("invalid velocity", 2.0F, 3.0F);
+    invalidVelocity.velocity.y = std::numeric_limits<float>::infinity();
+    rejected = false;
+    try { invalidVelocity.update(1.0F); }
+    catch (const std::invalid_argument&) { rejected = true; }
+    assert(rejected);
+    assert(invalidVelocity.position.x == 2.0F);
+    assert(invalidVelocity.position.y == 3.0F);
+
+    // If only one coordinate overflows, neither coordinate may be committed.
+    Entity partialOverflow("partial overflow", 11.0F, std::numeric_limits<float>::max());
+    partialOverflow.velocity = Vector2(5.0F, std::numeric_limits<float>::max());
+    rejected = false;
+    try { partialOverflow.update(2.0F); }
+    catch (const std::overflow_error&) { rejected = true; }
+    assert(rejected);
+    assert(partialOverflow.position.x == 11.0F);
+    assert(partialOverflow.position.y == std::numeric_limits<float>::max());
     return 0;
 }
