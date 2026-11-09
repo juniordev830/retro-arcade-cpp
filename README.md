@@ -26,7 +26,7 @@ g++ -std=c++17 -Wall -Wextra -pedantic main.cpp -o arcade_engine.exe
 
 ## Testes
 
-Os testes cobrem soma e magnitude vetorial (incluindo valores grandes que podem causar overflow intermediário), atualização de posição, rejeição de delta time inválido e prevenção de overflow da posição.
+Os testes cobrem soma e magnitude vetorial (incluindo valores grandes que podem causar overflow intermediário), atualização de posição, rejeição de delta time inválido, prevenção de overflow e colisões AABB: sobreposição, contato pelas bordas, separação, contenção de pontos, limites extremos e entradas inválidas.
 
 Linux/macOS:
 
