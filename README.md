@@ -21,7 +21,7 @@ Windows com MinGW:
 
 ```powershell
 g++ -std=c++17 -Wall -Wextra -pedantic main.cpp -o arcade_engine.exe
-.\\arcade_engine.exe
+.\arcade_engine.exe
 ```
 
 ## Testes
@@ -45,6 +45,7 @@ O GitHub Actions compila o exemplo e a suíte de regressão com avisos tratados 
 - Entidade com posição e velocidade.
 - Atualização de posição usando delta time.
 - Hitboxes `AABB2` para detectar sobreposição e verificar se um ponto está dentro de um retângulo.
+- Limites de colisão com centro finito e semiextensões não negativas.
 - Validação de valores não finitos e prevenção de overflow de posição.
 - Demonstração no terminal.
 
