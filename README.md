@@ -1,6 +1,6 @@
 # Retro Arcade — C++ Core
 
-Exercício em C++17 que explora operações vetoriais 2D e atualização de posição de uma entidade usando velocidade e delta time.
+Exercício em C++17 que explora operações vetoriais 2D, atualização de posição de entidades usando velocidade e delta time, e colisão entre hitboxes retangulares.
 
 > O código atual é um exemplo de núcleo de simulação em console; ainda não é uma engine gráfica completa nem implementa um sistema ECS.
 
@@ -21,7 +21,7 @@ Windows com MinGW:
 
 ```powershell
 g++ -std=c++17 -Wall -Wextra -pedantic main.cpp -o arcade_engine.exe
-.\arcade_engine.exe
+.\\arcade_engine.exe
 ```
 
 ## Testes
@@ -44,12 +44,14 @@ O GitHub Actions compila o exemplo e a suíte de regressão com avisos tratados 
 - Tipo `Vector2` com soma e cálculo de magnitude.
 - Entidade com posição e velocidade.
 - Atualização de posição usando delta time.
+- Hitboxes `AABB2` para detectar sobreposição e verificar se um ponto está dentro de um retângulo.
 - Validação de valores não finitos e prevenção de overflow de posição.
 - Demonstração no terminal.
 
 ## Organização
 
 - `core.hpp`: tipos reutilizáveis `Vector2` e `Entity`, independentes do executável.
+- `collision.hpp`: colisão 2D por retângulos alinhados aos eixos.
 - `main.cpp`: demonstração no terminal.
 - `tests/test_core.cpp`: testes que incluem diretamente o núcleo.
 
