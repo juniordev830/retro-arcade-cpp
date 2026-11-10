@@ -1,4 +1,4 @@
-#include "../core.hpp"
+#include "../collision.hpp"
 
 #include <cassert>
 #include <limits>
@@ -84,5 +84,59 @@ int main() {
     assert(rejected);
     assert(partialOverflow.position.x == 11.0F);
     assert(partialOverflow.position.y == std::numeric_limits<float>::max());
+
+    // AABB collision is symmetric and counts touching edges as contact.
+    const AABB2 playerBox(Vector2(10.0F, 10.0F), Vector2(2.0F, 3.0F));
+    const AABB2 overlappingBox(Vector2(11.0F, 12.0F), Vector2(1.0F, 1.0F));
+    const AABB2 touchingBox(Vector2(13.0F, 10.0F), Vector2(1.0F, 1.0F));
+    const AABB2 separatedX(Vector2(13.1F, 10.0F), Vector2(1.0F, 1.0F));
+    const AABB2 separatedY(Vector2(10.0F, 14.1F), Vector2(1.0F, 1.0F));
+    assert(playerBox.intersects(overlappingBox));
+    assert(overlappingBox.intersects(playerBox));
+    assert(playerBox.intersects(touchingBox));
+    assert(!playerBox.intersects(separatedX));
+    assert(!playerBox.intersects(separatedY));
+
+    // Boundary points are contained, while points beyond either axis are not.
+    assert(playerBox.contains(Vector2(10.0F, 10.0F)));
+    assert(playerBox.contains(Vector2(12.0F, 13.0F)));
+    assert(!playerBox.contains(Vector2(12.01F, 13.0F)));
+    assert(!playerBox.contains(Vector2(12.0F, 13.01F)));
+
+    // A zero-size box is a valid point collider.
+    const AABB2 pointBox(Vector2(-4.0F, 5.0F), Vector2());
+    assert(pointBox.contains(Vector2(-4.0F, 5.0F)));
+    assert(!pointBox.contains(Vector2(-3.999F, 5.0F)));
+
+    // Constructor validation prevents invalid collision bounds.
+    rejected = false;
+    try {
+        AABB2 invalidCenter(
+            Vector2(std::numeric_limits<float>::quiet_NaN(), 0.0F),
+            Vector2(1.0F, 1.0F));
+    } catch (const std::invalid_argument&) { rejected = true; }
+    assert(rejected);
+
+    rejected = false;
+    try {
+        AABB2 negativeExtent(Vector2(), Vector2(-1.0F, 1.0F));
+    } catch (const std::invalid_argument&) { rejected = true; }
+    assert(rejected);
+
+    rejected = false;
+    try {
+        AABB2 infiniteExtent(
+            Vector2(),
+            Vector2(1.0F, std::numeric_limits<float>::infinity()));
+    } catch (const std::invalid_argument&) { rejected = true; }
+    assert(rejected);
+
+    // Double intermediates keep extreme finite centers comparable.
+    const AABB2 farPositive(
+        Vector2(std::numeric_limits<float>::max(), 0.0F), Vector2());
+    const AABB2 farNegative(
+        Vector2(-std::numeric_limits<float>::max(), 0.0F), Vector2());
+    assert(!farPositive.intersects(farNegative));
+
     return 0;
 }
