@@ -63,3 +63,7 @@ O GitHub Actions compila o exemplo e a suíte de regressão com avisos tratados 
 - Introduzir renderização somente quando houver uma biblioteca gráfica definida.
 
 Projeto de aprendizagem em evolução.
+
+## Validação e manutenção
+
+Consulte o [guia técnico de validação](docs/GUIA_DE_VALIDACAO.md) antes de alterar o código: ele reúne os comandos, casos de regressão e limites atuais do projeto.
