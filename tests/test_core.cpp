@@ -23,6 +23,16 @@ int main() {
     const Vector2 zero = Vector2().normalized();
     assert(zero.x == 0.0F && zero.y == 0.0F);
 
+    const float maximum = std::numeric_limits<float>::max();
+    const float tiny = std::numeric_limits<float>::denorm_min();
+    const float diagonal = std::sqrt(0.5F);
+    const Vector2 unitLarge = Vector2(maximum, -maximum).normalized();
+    const Vector2 unitTiny = Vector2(tiny, tiny).normalized();
+    assert(std::abs(unitLarge.x - diagonal) < 0.0001F);
+    assert(std::abs(unitLarge.y + diagonal) < 0.0001F);
+    assert(std::abs(unitTiny.x - diagonal) < 0.0001F);
+    assert(std::abs(unitTiny.y - diagonal) < 0.0001F);
+
     Entity entity("test", 1.0F, 2.0F);
     entity.velocity = Vector2(2.0F, -1.0F);
     entity.update(0.5F);

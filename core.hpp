@@ -25,9 +25,9 @@ struct Vector2 {
     }
 
     Vector2 normalized() const {
-        const float length = magnitude();
-        if (length == 0.0F) return Vector2();
-        return Vector2(x / length, y / length);
+        const double length = std::hypot(static_cast<double>(x), static_cast<double>(y));
+        if (length == 0.0) return Vector2();
+        return Vector2(static_cast<float>(x / length), static_cast<float>(y / length));
     }
 
     float distanceTo(const Vector2& other) const {
