@@ -148,5 +148,21 @@ int main() {
         Vector2(-std::numeric_limits<float>::max(), 0.0F), Vector2());
     assert(!farPositive.intersects(farNegative));
 
+    // Swept collision detects fast objects that would otherwise pass through.
+    const AABB2 projectile(Vector2(0.0F, 0.0F), Vector2(1.0F, 1.0F));
+    const AABB2 wall(Vector2(10.0F, 0.0F), Vector2(1.0F, 4.0F));
+    const auto impact = sweptContact(projectile, Vector2(20.0F, 0.0F), wall);
+    assert(impact.has_value() && std::abs(*impact - 0.4) < 1e-9);
+    assert(!sweptContact(projectile, Vector2(-20.0F, 0.0F), wall));
+    assert(!sweptContact(projectile, Vector2(7.0F, 0.0F), wall));
+    assert(!sweptContact(projectile, Vector2(), wall));
+    assert(sweptContact(projectile, Vector2(8.0F, 0.0F), wall) == 1.0);
+    assert(sweptContact(wall, Vector2(1.0F, 1.0F), wall) == 0.0);
+    const auto reverseImpact = sweptContact(wall, Vector2(-20.0F, 0.0F), projectile);
+    assert(reverseImpact && std::abs(*reverseImpact - 0.4) < 1e-9);
+    rejected = false;
+    try { sweptContact(projectile, Vector2(std::numeric_limits<float>::infinity(), 0.0F), wall); }
+    catch (const std::invalid_argument&) { rejected = true; }
+    assert(rejected);
     return 0;
 }
