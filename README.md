@@ -67,3 +67,7 @@ Projeto de aprendizagem em evolução.
 ## Validação e manutenção
 
 Consulte o [guia técnico de validação](docs/GUIA_DE_VALIDACAO.md) antes de alterar o código: ele reúne os comandos, casos de regressão e limites atuais do projeto.
+
+## Colisão contínua
+
+`sweptContact(moving, displacement, target)` devolve o instante normalizado de primeiro contato (0 a 1) ou `std::nullopt` quando não há contato no passo. Considera o alvo parado, inclui contato nas bordas e evita que objetos rápidos atravessem hitboxes. Não resolve a colisão ou modifica a posição. Os testes cobrem aproximação, afastamento, contato inicial/final e entradas inválidas.
