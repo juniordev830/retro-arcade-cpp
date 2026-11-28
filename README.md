@@ -1,5 +1,7 @@
 # Retro Arcade — C++ Core
 
+**Navegação** · [Requisitos](#requisitos) · [Compilar e executar](#compilar-e-executar) · [Testes](#testes) · [Código e estudo](docs/ENGENHARIA_REVERSA.md)
+
 Exercício em C++17 que explora operações vetoriais 2D, atualização de posição de entidades usando velocidade e delta time, e colisão entre hitboxes retangulares.
 
 > O código atual é um exemplo de núcleo de simulação em console; ainda não é uma engine gráfica completa nem implementa um sistema ECS.
@@ -67,3 +69,9 @@ Projeto de aprendizagem em evolução.
 ## Validação e manutenção
 
 Consulte o [guia técnico de validação](docs/GUIA_DE_VALIDACAO.md) antes de alterar o código: ele reúne os comandos, casos de regressão e limites atuais do projeto.
+
+## Código e roteiro de estudo
+
+Qual resultado o teste deve esperar ao encostar apenas nas bordas de duas caixas? O [guia de engenharia reversa](docs/ENGENHARIA_REVERSA.md) reúne o mapa dos módulos e uma pergunta técnica baseada no projeto.
+
+Mantido por [João Junior](https://github.com/juniordev830).
